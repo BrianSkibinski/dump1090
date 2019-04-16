@@ -748,7 +748,7 @@ function initialize_map() {
                 var ringStyle = new ol.style.Style({
                         fill: null,
                         stroke: new ol.style.Stroke({
-                                color: '#000000',
+                                color: '#685220',
                                 width: 1
                         })
                 });
@@ -786,12 +786,12 @@ function createSiteCircleFeatures() {
     	return new ol.style.Style({
             fill: null,
             stroke: new ol.style.Stroke({
-                    color: '#000000',
+                    color: '#666666',
                     width: 1
             }),
             text: new ol.style.Text({
             	font: '10px Helvetica Neue, sans-serif',
-            	fill: new ol.style.Fill({ color: '#000' }),
+            	fill: new ol.style.Fill({ color: '#666' }),
 				offsetY: -8,
 				text: format_distance_long(distance, DisplayUnits, 0)
 

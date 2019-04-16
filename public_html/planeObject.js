@@ -406,9 +406,46 @@ PlaneObject.prototype.updateIcon = function() {
                 });
 
                 this.markerIcon = icon;
+
+                var labelText = (this.flight ? this.flight : this.registration);
+
+                if (this.icaotype) {
+                    labelText = labelText + ' ' + this.icaotype;
+                }
+
+                labelText     = labelText +'\n'+ (this.altitude ? (this.altitude > 18000 ? 'FL' + Math.round(this.altitude/100) : parseInt(this.altitude)) : '?');
+
+                if (this.vert_rate > 128){
+                    labelText = labelText + ' ↗';//Up-right arrow
+                }
+                else if (this.vert_rate < -128) {
+                    labelText = labelText + ' ↘'; //down-right arrow
+                }
+
+                if (this.nav_altitude && Math.abs(this.vert_rate) > 128) {
+                   labelText     = labelText + ' ' + (this.nav_altitude > 18000 ? 'FL' + Math.round(this.nav_altitude/100) : Math.round(this.nav_altitude/100)*100);
+                }
+
+                if (this.speed) {
+                   labelText     = labelText + '\n' + (this.speed ? parseInt(this.speed) : 'Unk') + ' kts';
+                }
+
                 this.markerStyle = new ol.style.Style({
+
+                       text: new ol.style.Text({
+                             text: labelText ,
+                             fill: new ol.style.Fill({color: '#ede887cc'}),
+                             stroke: new ol.style.Stroke({color: this.labelColour, width: 1}),
+                             textAlign: 'left',
+                             textBaseline: "bottom",
+                             font: 'normal 10px tahoma',
+                             offsetX: +15,
+                             offsetY: +30
+                        }),
+
                         image: this.markerIcon
                 });
+
                 this.markerStaticIcon = null;
                 this.markerStaticStyle = new ol.style.Style({});
 
